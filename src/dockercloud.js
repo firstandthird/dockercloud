@@ -232,9 +232,9 @@ class DockerCloud {
         if (response.statusCode >= 300) return reject(body)
 
         const services = JSON.parse(body).objects
-        const service = services.find(x => x.state !== STATES.TERMINATED)
+        const activeServices = services.filter(x => x.state !== STATES.TERMINATED)
 
-        return resolve(service)
+        return resolve(activeServices)
       })
     })
   }
