@@ -9,7 +9,7 @@ Node.js library for Docker Cloud API
 ## Installation
 
 ```
-npm install dockercloud
+npm install @firstandthird/dockercloud
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ To use this class firstly you need to instantiate a new instance:
 ```js
 import DockerCloud from 'dockercloud'
 
-const dockerCloud = new DockerCloud('username', 'password')
+const dockerCloud = new DockerCloud('username', 'password', 'namespace')
 ```
 
 ### Methods
