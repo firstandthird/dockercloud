@@ -59,6 +59,7 @@ class DockerCloud {
   }
 
   services = {
+    find: this.findServices.bind(this),
     findById: this.findServiceById.bind(this),
     findByName: this.findServiceByName.bind(this),
     create: this.createService.bind(this),
@@ -223,6 +224,20 @@ class DockerCloud {
   }
 
   // Services
+
+  findServices() {
+    return new Promise((resolve, reject) => {
+      this.appRequest.get('/service', (error, response, body) => {
+        if (error) return reject(error)
+        if (response.statusCode >= 300) return reject(body)
+
+        const services = JSON.parse(body).objects
+        const service = services.find(x => x.state !== STATES.TERMINATED)
+
+        return resolve(service)
+      })
+    })
+  }
 
   findServiceById(id) {
     return new Promise((resolve, reject) => {
